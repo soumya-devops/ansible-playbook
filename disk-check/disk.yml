@@ -1,0 +1,16 @@
+---
+- name: enabled services
+  hosts: web
+  tasks:
+  - name: Copy the script file
+    copy:
+      src: /root/ansible/disk.py
+      dest: /root
+      mode: 0755
+      owner: root
+      group: root 
+  - name: webserver is enabled
+    command: "/usr/bin/python /root/disk.py"
+    register: result
+  - debug:
+      var: result
